@@ -12,7 +12,10 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(eigen)
 
 if(DEFINED SKBUILD)
-  # ... Fill me in!
+  find_package(pybind11)
+  pybind11_add_module(se_for_sci_hw6 MODULE src/_core.cpp)
+  target_include_directories(se_for_sci_hw6 PRIVATE src "${eigen_SOURCE_DIR}")
+  install(TARGETS se_for_sci_hw6 DESTINATION se_for_sci_hw6)
 else()
   add_executable(main src/main.cpp src/integrator.hpp)
   target_include_directories(main PRIVATE src "${eigen_SOURCE_DIR}")
